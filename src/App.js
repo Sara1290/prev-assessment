@@ -1,11 +1,13 @@
 
-import './App.css';
-import ForceDirected from './Components/ForceDirected';
+import Table from "./Components/MaterialTable";
+
 
 function App() {
   return (
-    <div className="App">
-      <ForceDirected />
+    <div className="app">
+      <div className="containers">
+        <Table></Table>
+      </div>
     </div>
   );
 }

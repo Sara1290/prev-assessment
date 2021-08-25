@@ -15,99 +15,228 @@ let series = chart.series.push(new am4plugins_forceDirected.ForceDirectedSeries(
 
 // Set data
 series.data = [{
-  "name": "Marvin Martian",
+  "name": "000001",
+  "color": "#ff0000",
   "children": [{
-    "name": "PIL", "value": 100
+    "name": "PIL", "value": 800,
+    "color": "#FF0000"
   }, {
-    "name": "ACE", "value": 60
+    "name": "ACE", "value": 60,
+    "color": "#11CC33"
   }, {
-    "name": "SSQ", "value": 30
+    "name": "SSQ", "value": 30,
+    "color": "#11CC33"
   }, {
-    "name": "PTS", "value": 30
+    "name": "PTS", "value": 500,
+    "color": "#FF0000"
   }, {
-    "name": "ISI", "value": 30
+    "name": "ISI", "value": 500,
+    "color": "#FFA500"
   }, {
-    "name": "DEP", "value": 30
+    "name": "DEP", "value": 200,
+    "color": "#FFDF00"
   }, {
-    "name": "GAD", "value": 30
+    "name": "GAD", "value": 600,
+    "color": "#FFA500"
   }, {
-    "name": "SSRS", "value": 1
+    "name": "SSRS", "value": 0,
+    "color": "#11CC33"
   }]
 }, {
-  "name": "Yosemite Sam",
+  "name": "000002",
+  "color": "#ff0000",
   "children": [{
-    "name": "PIL", "value": 100
+    "name": "PIL", "value": 700, 
+    "color": "#ff0000",
   }, {
-    "name": "ACE", "value": 60
+    "name": "ACE", "value": 600, 
+    "color": "#ff0000",
   }, {
-    "name": "SSQ", "value": 30
+    "name": "SSQ", "value": 30,
+    "color": "#11cc33",
   }, {
-    "name": "PTS", "value": 30
+    "name": "PTS", "value": 30,
+    "color": "#11cc33",
   }, {
-    "name": "ISI", "value": 30
+    "name": "ISI", "value": 30,
+    "color": "#FFDF00",
   }, {
-    "name": "DEP", "value": 30
+    "name": "DEP", "value": 300,
+    "color": "#ffa500",
   }, {
-    "name": "GAD", "value": 30
+    "name": "GAD", "value": 30,
+    "color": "#11cc33",
   }, {
-    "name": "SSRS", "value": 1
+    "name": "SSRS", "value": 1,
+    "color": "#11cc33",
   }]
 }, {
-  "name": "Elmer Fudd",
+  "name": "000003",
+  "color": "#FFA500",
   "children": [{
-    "name": "PIL", "value": 100
+    "name": "PIL", "value": 100,
+    "color": "#ffDF00",
   }, {
-    "name": "ACE", "value": 60
+    "name": "ACE", "value": 800,
+    "color": "#ff0000",
   }, {
-    "name": "SSQ", "value": 30
+    "name": "SSQ", "value": 30,
+    "color": "#1C3",
   }, {
-    "name": "PTS", "value": 30
+    "name": "PTS", "value": 30,
+    "color": "#1C3",
   }, {
-    "name": "ISI", "value": 30
+    "name": "ISI", "value": 30,
+    "color": "#1C3",
   }, {
-    "name": "DEP", "value": 30
+    "name": "DEP", "value": 500,
+    "color": "#ffA500",
   }, {
-    "name": "GAD", "value": 30
+    "name": "GAD", "value": 30,
+    "color": "#1C3",
   }, {
-    "name": "SSRS", "value": 1
+    "name": "SSRS", "value": 1,
+    "color": "#1C3",
   }]
 }, {
-  "name": "Bugs Bunny",
+  "name": "000004",
+  "color": "#FFA500",
   "children": [{
-    "name": "PIL", "value": 100
+    "name": "PIL", "value": 100,
+    "color": "#ffDF00",
   }, {
-    "name": "ACE", "value": 60
+    "name": "ACE", "value": 100,
+    "color": "#1c3",
   }, {
-    "name": "SSQ", "value": 30
+    "name": "SSQ", "value": 30,
+    "color": "#1C3",
   }, {
-    "name": "PTS", "value": 30
+    "name": "PTS", "value": 30,
+    "color": "#1C3",
   }, {
-    "name": "ISI", "value": 30
+    "name": "ISI", "value": 30,
+    "color": "#1C3",
   }, {
-    "name": "DEP", "value": 30
+    "name": "DEP", "value": 500,
+    "color": "#ffA500",
   }, {
-    "name": "GAD", "value": 30
+    "name": "GAD", "value": 700,
+    "color": "#f00",
   }, {
-    "name": "SSRS", "value": 1
+    "name": "SSRS", "value": 1,
+    "color": "#1C3",
   }]
 }, {
-  "name": "Daffy Duck",
+  "name": "000005",
+  "color": "#ffdf00",
   "children": [{
-    "name": "PIL", "value": 100
+    "name": "PIL", "value": 200,
+    "color": "#11CC33",
   }, {
-    "name": "ACE", "value": 60
+    "name": "ACE", "value": 60,
+    "color": "#11CC33",
   }, {
-    "name": "SSQ", "value": 30
+    "name": "SSQ", "value": 100,
+    "color": "#1C3",
   }, {
-    "name": "PTS", "value": 30
+    "name": "PTS", "value": 50,
+    "color": "#11CC33",
   }, {
-    "name": "ISI", "value": 30
+    "name": "ISI", "value": 30,
+    "color": "#11CC33",
   }, {
-    "name": "DEP", "value": 30
+    "name": "DEP", "value": 800,
+    "color": "#FFA500",
   }, {
-    "name": "GAD", "value": 30
+    "name": "GAD", "value": 30,
+    "color": "#11CC33",
   }, {
-    "name": "SSRS", "value": 1
+    "name": "SSRS", "value": 1,
+    "color": "#11CC33",
+  }]
+}, {
+  "name": "000006",
+  "color": "#ffdf00",
+  "children": [{
+    "name": "PIL", "value": 200,
+    "color": "#11CC33",
+  }, {
+    "name": "ACE", "value": 60,
+    "color": "#11CC33",
+  }, {
+    "name": "SSQ", "value": 700,
+    "color": "#FFA500",
+  }, {
+    "name": "PTS", "value": 50,
+    "color": "#11CC33",
+  }, {
+    "name": "ISI", "value": 30,
+    "color": "#11CC33",
+  }, {
+    "name": "DEP", "value": 30,
+    "color": "#11CC33",
+  }, {
+    "name": "GAD", "value": 30,
+    "color": "#11CC33",
+  }, {
+    "name": "SSRS", "value": 1,
+    "color": "#11CC33",
+  }]
+}, {
+  "name": "000007",
+  "color": "#11cc33",
+  "children": [{
+    "name": "PIL", "value": 200,
+    "color": "#11CC33",
+  }, {
+    "name": "ACE", "value": 60,
+    "color": "#11CC33",
+  }, {
+    "name": "SSQ", "value": 30,
+    "color": "#FFDF00",
+  }, {
+    "name": "PTS", "value": 50,
+    "color": "#11CC33",
+  }, {
+    "name": "ISI", "value": 30,
+    "color": "#11CC33",
+  }, {
+    "name": "DEP", "value": 30,
+    "color": "#11CC33",
+  }, {
+    "name": "GAD", "value": 30,
+    "color": "#11CC33",
+  }, {
+    "name": "SSRS", "value": 1,
+    "color": "#11CC33",
+  }]
+}, {
+  "name": "000008",
+  "color": "#11cc33",
+  "children": [{
+    "name": "PIL", "value": 200,
+    "color": "#11CC33",
+  }, {
+    "name": "ACE", "value": 60,
+    "color": "#11CC33",
+  }, {
+    "name": "SSQ", "value": 30,
+    "color": "#11CC33",
+  }, {
+    "name": "PTS", "value": 50,
+    "color": "#11CC33",
+  }, {
+    "name": "ISI", "value": 30,
+    "color": "#11CC33",
+  }, {
+    "name": "DEP", "value": 30,
+    "color": "#11CC33",
+  }, {
+    "name": "GAD", "value": 30,
+    "color": "#FFDF00",
+  }, {
+    "name": "SSRS", "value": 1,
+    "color": "#11CC33",
   }]
 }];
 
