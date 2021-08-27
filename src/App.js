@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from './Components/Footer';
 import Header from './Components/Header'
 import Legend from './Components/Legend';
 import ReactColor from "./Components/ReactColor";
@@ -11,6 +12,7 @@ function App() {
       <Header />
       <ReactColor />
       <Legend />
+      <Footer />
     </div>
   );
 }

@@ -189,7 +189,6 @@ function Table({
             </AnimatePresence>
       </tbody>
     </table>
-    
   )
 }
 
@@ -453,7 +452,7 @@ function ReactColor() {
         OR: '0',
       },
       {
-        CLI: '0009',
+        CLI: '0010',
          PIL: '0',
          ACE: '0',
          AA: '15',
