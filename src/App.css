@@ -32,7 +32,7 @@
 }
 
 /* found this class in inspect tools, came from react-table package */
-.bPlUSF {
+.table-outer {
     padding: 1rem;
     display: flex;
     justify-content: center;
@@ -52,29 +52,37 @@
   width: 20px;
   position: relative;
   top: 22px;
-  background-color: #1f3;
+  background-color: #66ff1a;
 }
 .yellow {
   height: 20px;
   width: 20px;
   position: relative;
   top: 22px;
-  background-color: #ffdf00;
+  background-color: #FFEC1A;
 }
 .orange {
   height: 20px;
   width: 20px;
   position: relative;
   top: 22px;
-  background-color: #ffa500;
+  background-color: #ffb31a;
 }
 .red {
   height: 20px;
   width: 20px;
   position: relative;
   top: 22px;
-  background-color: #f50;
+  background-color: #ff791a;
 }
 h3 {
   color: rgb(30, 30, 30)
+}
+/* cell hover */
+td:hover {
+  filter: brightness(0.75);
+}
+/* column title hover */
+th:hover {
+  background-color: azure;
 }

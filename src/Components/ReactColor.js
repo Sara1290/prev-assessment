@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useTable, useSortBy, useFilters, useColumnOrder } from 'react-table'
+import { useTable, useSortBy, useFilters, useColumnOrder, useRowSelect} from 'react-table'
 import { motion, AnimatePresence } from 'framer-motion'
 
 
@@ -39,7 +39,22 @@ const Styles = styled.div`
     }
   }
 `
+const IndeterminateCheckbox = React.forwardRef(
+  ({ indeterminate, ...rest }, ref) => {
+    const defaultRef = React.useRef()
+    const resolvedRef = ref || defaultRef
 
+    React.useEffect(() => {
+      resolvedRef.current.indeterminate = indeterminate
+    }, [resolvedRef, indeterminate])
+
+    return (
+      <>
+        <input type="checkbox" ref={resolvedRef} {...rest} />
+      </>
+    )
+  }
+)
 // Create a default prop getter
 const defaultPropGetter = () => ({})
 
@@ -51,6 +66,7 @@ function Table({
   getColumnProps = defaultPropGetter,
   getRowProps = defaultPropGetter,
   getCellProps = defaultPropGetter,
+  getTrProps = defaultPropGetter,
 }) {
   const defaultColumn = React.useMemo(
     () => ({
@@ -65,6 +81,7 @@ function Table({
     headerGroups,
     rows,
     prepareRow,
+    state: { selectedRowIds },
   } = useTable({
     columns,
     data,
@@ -72,7 +89,31 @@ function Table({
   },
   useColumnOrder,
   useFilters,
-  useSortBy
+  useSortBy,
+  useRowSelect,
+  hooks => {
+    hooks.visibleColumns.push(columns => [
+      // Let's make a column for selection
+      {
+        id: 'selection',
+        // The header can use the table's getToggleAllRowsSelectedProps method
+        // to render a checkbox
+        Header: ({ getToggleAllRowsSelectedProps }) => (
+          <div>
+            <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
+          </div>
+        ),
+        // The cell can use the individual row's getToggleRowSelectedProps method
+        // to the render a checkbox
+        Cell: ({ row }) => (
+          <div>
+            <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
+          </div>
+        ),
+      },
+      ...columns,
+    ])
+  }
   )
 
 
@@ -84,7 +125,6 @@ function Table({
     }),
     []
   )
-
     
 
   return (
@@ -149,22 +189,26 @@ function Table({
             </AnimatePresence>
       </tbody>
     </table>
+    
   )
 }
 
+
+//THIS FUNCTION ADDS A SEARCH INPUT WHEN THE DROP DOWN IS REMOVED FROM THE COLUMN. TO GET RID OF THE INPUT, I NULL OUT THE RETURN.
 function DefaultColumnFilter({
   column: { filterValue, preFilteredRows, setFilter },
 }) {
-  const count = preFilteredRows.length
+  // const count = preFilteredRows.length
 
   return (
-    <input
-      value={filterValue || ''}
-      onChange={e => {
-        setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
-      }}
-      placeholder={`Search ${count} records...`}
-    />
+    null
+    // <input
+    //   value={filterValue || ''}
+    //   onChange={e => {
+    //     setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
+    //   }}
+    //   placeholder={`Search ${count} records...`}
+    // />
   )
 }
 
@@ -208,9 +252,19 @@ function filterGreaterThan(rows, id, filterValue) {
 
 filterGreaterThan.autoRemove = val => typeof val !== 'number'
 
+
+
 function ReactColor() {
+
   const columns = React.useMemo(
     () => [
+      {
+        Header: 'Client',
+        accessor: 'CLI', // accessor is the "key" in the data
+        minWidth: 150,
+        Filter: SelectColumnFilter,
+        filter: 'includes',
+      },
       {
         Header: 'Purpose In Life',
         accessor: 'PIL', // accessor is the "key" in the data
@@ -282,7 +336,7 @@ function ReactColor() {
   const data = React.useMemo(
     () => [
       {
-       
+       CLI: '0001',
         PIL: '0',
         ACE: '0',
         AA: '15',
@@ -294,19 +348,21 @@ function ReactColor() {
         SSRS: '0',
         OR: '15',
       },
-      {
+{
+       CLI: '0002',
         PIL: '0',
-        ACE: '0',
+        ACE: '0',      
         AA: '0',
         SSQ: '15',
         PTS: '0',
         ISI: '0',
         DEP: '25',
-        GAD: '15',
+        GAD: '20',
         SSRS: '0',
         OR: '20',
       },
       {
+       CLI: '0003',
         PIL: '0',
         ACE: '15',
         AA: '20',
@@ -319,6 +375,7 @@ function ReactColor() {
         OR: '15',
       },
       {
+       CLI: '0004',
         PIL: '25',
         ACE: '15',
         AA: '20',
@@ -331,6 +388,7 @@ function ReactColor() {
         OR: '25',
       },
       {
+       CLI: '0005',
         PIL: '15',
         ACE: '15',
         AA: '25',
@@ -343,6 +401,7 @@ function ReactColor() {
         OR: '25',
       },
       {
+       CLI: '0006',
         PIL: '0',
         ACE: '15',
         AA: '25',
@@ -355,6 +414,7 @@ function ReactColor() {
         OR: '15',
       },
       {
+       CLI: '0007',  
         PIL: '0',
         ACE: '0',
         AA: '25',
@@ -367,6 +427,7 @@ function ReactColor() {
         OR: '15',
       },
       {
+       CLI: '0008',
         PIL: '20',
         ACE: '15',
         AA: '0',
@@ -379,6 +440,7 @@ function ReactColor() {
         OR: '20',
       },
       {
+       CLI: '0009',
         PIL: '0',
         ACE: '0',
         AA: '15',
@@ -390,6 +452,19 @@ function ReactColor() {
         SSRS: '0',
         OR: '0',
       },
+      {
+        CLI: '0009',
+         PIL: '0',
+         ACE: '0',
+         AA: '15',
+         SSQ: '0',
+         PTS: '0',
+         ISI: '0',
+         DEP: '0',
+         GAD: '15',
+         SSRS: '0',
+         OR: '0',
+       },
     ],
     []
   )  
@@ -397,17 +472,26 @@ function ReactColor() {
 
   return (
     <Styles>
-      <Table
-        columns={columns}
-        data={data}
-
-        getCellProps={cellInfo => ({
-          style: {
-            backgroundColor: `hsl(${25 * ((25 - cellInfo.value) / 25) * +3 +
-              25}, 100%, 55%)`,
-          },
-        })}
-      />
+      <div className="table-outer">
+        <Table
+          columns={columns}
+          data={data}
+          
+          getCellProps={cellInfo => ({
+            style: {
+              backgroundColor: `hsl(${25 * ((25 - cellInfo.value) / 25) * + 3 +
+                25}, 100%, 55%)`,
+              },
+            })}
+            getTrProps={(state, rowInfo, column) => {
+                return {
+                    style: {
+                        background: rowInfo.row.selected ? 'green' : 'red'
+                      }
+                    }
+                  }}
+                  />
+      </div>
     </Styles>
   )
 }
