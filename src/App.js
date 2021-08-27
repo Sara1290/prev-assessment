@@ -1,13 +1,16 @@
 
-import Table from "./Components/MaterialTable";
+// import Table from "./Components/MaterialTable";
+
+import ReactTable from "./Components/ReactTable";
 
 
 function App() {
   return (
     <div className="app">
-      <div className="containers">
+      {/* <div className="containers">
         <Table></Table>
-      </div>
+      </div> */}
+      <ReactTable />
     </div>
   );
 }
