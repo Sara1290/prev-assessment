@@ -2,15 +2,16 @@ import React from 'react'
 import styled from 'styled-components'
 import { useTable, useSortBy, useFilters, useColumnOrder } from 'react-table'
 import { motion, AnimatePresence } from 'framer-motion'
-import {matchSorter} from 'match-sorter'
+
 
 
 
 const Styles = styled.div`
   padding: 1rem;
 
-  .low {
-    background-color: #11cc33
+  .user {
+    background-color: blue;
+    color: white;
   }
 
   table {
@@ -31,7 +32,6 @@ const Styles = styled.div`
       padding: 0.5rem;
       border-bottom: 1px solid black;
       border-right: 1px solid black;
-      background: white;
 
       :last-child {
         border-right: 0;
@@ -40,7 +40,118 @@ const Styles = styled.div`
   }
 `
 
-// Define a default UI for filtering
+// Create a default prop getter
+const defaultPropGetter = () => ({})
+
+// Expose some prop getters for headers, rows and cells, or more if you want!
+function Table({
+  columns,
+  data,
+  getHeaderProps = defaultPropGetter,
+  getColumnProps = defaultPropGetter,
+  getRowProps = defaultPropGetter,
+  getCellProps = defaultPropGetter,
+}) {
+  const defaultColumn = React.useMemo(
+    () => ({
+      // Let's set up our default Filter UI
+      Filter: DefaultColumnFilter,
+    }),
+    []
+  )
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+  } = useTable({
+    columns,
+    data,
+    defaultColumn
+  },
+  useColumnOrder,
+  useFilters,
+  useSortBy
+  )
+
+
+  const spring = React.useMemo(
+    () => ({
+      type: 'spring',
+      damping: 50,
+      stiffness: 100,
+    }),
+    []
+  )
+
+    
+
+  return (
+    <table {...getTableProps()}>
+      <thead>
+        {headerGroups.map(headerGroup => (
+          <tr {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map(column => (
+             <motion.th
+             {...column.getHeaderProps({
+               
+               className: column.className,
+               style: column.style,
+               layoutTransition: spring,
+               
+ 
+             })}
+           >
+             <div {...column.getSortByToggleProps()}>
+               {column.render('Header')}
+               <span>
+                 {column.isSorted
+                   ? column.isSortedDesc
+                     ? ' 🔽'
+                     : ' 🔼'
+                   : ''}
+               </span>
+             </div>
+             <div>{column.canFilter ? column.render('Filter') : null}</div>
+           </motion.th>
+            ))}
+          </tr>
+        ))}
+      </thead>
+      <tbody {...getTableBodyProps()}>
+      <AnimatePresence>
+        {rows.map((row, i) => {
+          prepareRow(row)
+          return (
+            // Merge user row props in
+            <tr {...row.getRowProps(getRowProps(row))}>
+              {row.cells.map(cell => {
+                return (
+                  <td
+                    // Return an array of prop objects and react-table will merge them appropriately
+                    {...cell.getCellProps([
+                      {
+                        className: cell.column.className,
+                        style: cell.column.style,
+                      },
+                      getColumnProps(cell.column),
+                      getCellProps(cell),
+                    ])}
+                  >
+                    {cell.render('Cell')}
+                  </td>
+                )
+              })}
+            </tr>
+          )
+        })}
+            </AnimatePresence>
+      </tbody>
+    </table>
+  )
+}
+
 function DefaultColumnFilter({
   column: { filterValue, preFilteredRows, setFilter },
 }) {
@@ -57,8 +168,6 @@ function DefaultColumnFilter({
   )
 }
 
-// This is a custom filter UI for selecting
-// a unique option from a list
 function SelectColumnFilter({
   column: { filterValue, setFilter, preFilteredRows, id },
 }) {
@@ -90,139 +199,6 @@ function SelectColumnFilter({
   )
 }
 
-
-
-
-function fuzzyTextFilterFn(rows, id, filterValue) {
-  return matchSorter(rows, filterValue, { keys: [row => row.values[id]] })
-}
-
-// Let the table remove the filter if the string is empty
-fuzzyTextFilterFn.autoRemove = val => !val
-
-
-
-function Table({ columns, data }) {
-  const defaultColumn = React.useMemo(
-    () => ({
-      // Let's set up our default Filter UI
-      Filter: DefaultColumnFilter,
-    }),
-    []
-  )
-
-  const defaultPropGetter = () => ({})
-
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    getCellProps = defaultPropGetter,
-    getColumnProps = defaultPropGetter,
-
-
-
-    // visibleColumns,
-    prepareRow,
-    // setColumnOrder,
-    // state,
-  } = useTable(
-    {
-      columns,
-      data,
-      defaultColumn,
-    },
-    useColumnOrder,
-    useFilters,
-    useSortBy
-  )
-
-  const spring = React.useMemo(
-    () => ({
-      type: 'spring',
-      damping: 50,
-      stiffness: 100,
-    }),
-    []
-  )
-
-
-  return (
-    <>
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map((headerGroup, i) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <motion.th
-                  {...column.getHeaderProps({
-                    
-                    className: column.className,
-                    style: column.style,
-                    layoutTransition: spring,
-
-                  })}
-                >
-                  <div {...column.getSortByToggleProps()}>
-                    {column.render('Header')}
-                    <span>
-                      {column.isSorted
-                        ? column.isSortedDesc
-                          ? ' 🔽'
-                          : ' 🔼'
-                        : ''}
-                    </span>
-                  </div>
-                  <div>{column.canFilter ? column.render('Filter') : null}</div>
-                </motion.th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          <AnimatePresence>
-            {rows.slice(0, 10).map((row, i) => {
-              prepareRow(row)
-              return (
-                <motion.tr
-                  {...row.getRowProps({
-                    layoutTransition: spring,
-                    exit: { opacity: 0, maxHeight: 0 },
-                  })}
-                >
-                  {row.cells.map((cell, i) => {
-                    return (
-                      <motion.td
-                        {...cell.getCellProps({
-                          // layoutTransition: spring,
-                          className: cell.column.className,
-                          style: cell.column.style,
-                        },
-                        getColumnProps(cell.column),
-                        getCellProps(cell),
-                        )}
-                      >
-                        {cell.render('Cell')}
-                      </motion.td>
-                    )
-                  })}
-                </motion.tr>
-              )
-            })}
-          </AnimatePresence>
-        </tbody>
-      </table>
-        
-      {/* 
-       <pre>
-        <code>{JSON.stringify(state, null, 2)}</code>
-      </pre> */}
-    </>
-  )
-}
-
-// Define a custom filter filter function!
 function filterGreaterThan(rows, id, filterValue) {
   return rows.filter(row => {
     const rowValue = row.values[id]
@@ -230,14 +206,9 @@ function filterGreaterThan(rows, id, filterValue) {
   })
 }
 
-// This is an autoRemove method on the filter function that
-// when given the new filter value and returns true, the filter
-// will be automatically removed. Normally this is just an undefined
-// check, but here, we want to remove the filter if it's not a number
 filterGreaterThan.autoRemove = val => typeof val !== 'number'
 
-function App() {
-
+function ReactColor() {
   const columns = React.useMemo(
     () => [
       {
@@ -248,11 +219,12 @@ function App() {
         filter: 'includes',
       },
       {
-        Header: 'ACE',
+        Header: "ACE'S",
         accessor: 'ACE',
         minWidth: 150,
         Filter: SelectColumnFilter,
         filter: 'includes',
+
       },
       {
         Header: 'Alcohol Abuse',
@@ -262,7 +234,7 @@ function App() {
         filter: 'includes',
       },
       {
-        Header: 'Support System Questionaire',
+        Header: 'Support System',
         accessor: 'SSQ',
         Filter: SelectColumnFilter,
         filter: 'includes',
@@ -274,7 +246,7 @@ function App() {
         filter: 'includes',
       },
       {
-        Header: 'Insomnia Severity Index',
+        Header: 'Insomnia Severity',
         accessor: 'ISI',
         Filter: SelectColumnFilter,
         filter: 'includes',
@@ -286,13 +258,13 @@ function App() {
         filter: 'includes',
       },
       {
-        Header: 'Generalized Anxiety Index',
+        Header: 'Generalized Anxiety',
         accessor: 'GAD',
         Filter: SelectColumnFilter,
         filter: 'includes',
       },
       {
-        Header: 'Columbia Suicide Severity Rating Scale',
+        Header: 'Suicide Severity Rating',
         accessor: 'SSRS',
         Filter: SelectColumnFilter,
         filter: 'includes',
@@ -310,6 +282,7 @@ function App() {
   const data = React.useMemo(
     () => [
       {
+       
         PIL: '0',
         ACE: '0',
         AA: '15',
@@ -360,9 +333,9 @@ function App() {
       {
         PIL: '15',
         ACE: '15',
-        AA: '0',
+        AA: '25',
         SSQ: '0',
-        PTS: '10',
+        PTS: '15',
         ISI: '0',
         DEP: '0',
         GAD: '20',
@@ -371,12 +344,12 @@ function App() {
       },
       {
         PIL: '0',
-        ACE: '10',
-        AA: '20',
+        ACE: '15',
+        AA: '25',
         SSQ: '0',
         PTS: '0',
         ISI: '0',
-        DEP: '5',
+        DEP: '15',
         GAD: '15',
         SSRS: '0',
         OR: '15',
@@ -384,7 +357,7 @@ function App() {
       {
         PIL: '0',
         ACE: '0',
-        AA: '15',
+        AA: '25',
         SSQ: '0',
         PTS: '15',
         ISI: '15',
@@ -393,13 +366,40 @@ function App() {
         SSRS: '0',
         OR: '15',
       },
+      {
+        PIL: '20',
+        ACE: '15',
+        AA: '0',
+        SSQ: '0',
+        PTS: '20',
+        ISI: '0',
+        DEP: '25',
+        GAD: '0',
+        SSRS: '0',
+        OR: '20',
+      },
+      {
+        PIL: '0',
+        ACE: '0',
+        AA: '15',
+        SSQ: '0',
+        PTS: '0',
+        ISI: '0',
+        DEP: '0',
+        GAD: '15',
+        SSRS: '0',
+        OR: '0',
+      },
     ],
     []
   )  
+  // const data = React.useMemo(() => makeData(20), [])
 
   return (
     <Styles>
-      <Table columns={columns} data={data} 
+      <Table
+        columns={columns}
+        data={data}
 
         getCellProps={cellInfo => ({
           style: {
@@ -412,4 +412,4 @@ function App() {
   )
 }
 
-export default App
+export default ReactColor;

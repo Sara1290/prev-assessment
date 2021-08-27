@@ -1,16 +1,16 @@
+import React from 'react';
+import Header from './Components/Header'
+import Legend from './Components/Legend';
+import ReactColor from "./Components/ReactColor";
 
-// import Table from "./Components/MaterialTable";
-
-import ReactTable from "./Components/ReactTable";
 
 
 function App() {
   return (
     <div className="app">
-      {/* <div className="containers">
-        <Table></Table>
-      </div> */}
-      <ReactTable />
+      <Header />
+      <ReactColor />
+      <Legend />
     </div>
   );
 }
