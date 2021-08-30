@@ -5,14 +5,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 
 
-
 const Styles = styled.div`
   padding: 1rem;
 
-  .user {
-    background-color: blue;
-    color: white;
-  }
 
   table {
     border-spacing: 0;
@@ -81,6 +76,7 @@ function Table({
     headerGroups,
     rows,
     prepareRow,
+    selectedFlatRows,
     state: { selectedRowIds },
   } = useTable({
     columns,
@@ -128,6 +124,7 @@ function Table({
     
 
   return (
+    <>
     <table {...getTableProps()}>
       <thead>
         {headerGroups.map(headerGroup => (
@@ -189,7 +186,11 @@ function Table({
             </AnimatePresence>
       </tbody>
     </table>
+    <br></br>
+    
+        </>
   )
+  
 }
 
 
@@ -251,9 +252,10 @@ function filterGreaterThan(rows, id, filterValue) {
 
 filterGreaterThan.autoRemove = val => typeof val !== 'number'
 
-
-
 function ReactColor() {
+  
+
+
 
   const columns = React.useMemo(
     () => [
@@ -270,6 +272,15 @@ function ReactColor() {
         minWidth: 150,
         Filter: SelectColumnFilter,
         filter: 'includes',
+        Cell: ({ value }) => {
+          const nameArr = ['0'];
+
+          return nameArr.includes(value) ? (
+            <div className='zero' >{value}</div>
+          ) : (
+            value
+          );
+        }
       },
       {
         Header: "ACE'S",
@@ -277,7 +288,15 @@ function ReactColor() {
         minWidth: 150,
         Filter: SelectColumnFilter,
         filter: 'includes',
+        Cell: ({ value }) => {
+          const nameArr = ['0'];
 
+          return nameArr.includes(value) ? (
+            <div className='zero' >{value}</div>
+          ) : (
+            value
+          );
+        }
       },
       {
         Header: 'Alcohol Abuse',
@@ -285,69 +304,143 @@ function ReactColor() {
         minWidth: 150,
         Filter: SelectColumnFilter,
         filter: 'includes',
+        Cell: ({ value }) => {
+          const nameArr = ['0'];
+
+          return nameArr.includes(value) ? (
+            <div className='zero' >{value}</div>
+          ) : (
+            value
+          );
+        }
       },
       {
         Header: 'Support System',
         accessor: 'SSQ',
         Filter: SelectColumnFilter,
         filter: 'includes',
+        Cell: ({ value }) => {
+          const nameArr = ['0'];
+
+          return nameArr.includes(value) ? (
+            <div className='zero' >{value}</div>
+          ) : (
+            value
+          );
+        }
       },
       {
         Header: 'Post Trauma Stress',
         accessor: 'PTS',
         Filter: SelectColumnFilter,
         filter: 'includes',
+        Cell: ({ value }) => {
+          const nameArr = ['0'];
+
+          return nameArr.includes(value) ? (
+            <div className='zero' >{value}</div>
+          ) : (
+            value
+          );
+        }
       },
       {
         Header: 'Insomnia Severity',
         accessor: 'ISI',
         Filter: SelectColumnFilter,
         filter: 'includes',
+        Cell: ({ value }) => {
+          const nameArr = ['0'];
+
+          return nameArr.includes(value) ? (
+            <div className='zero' >{value}</div>
+          ) : (
+            value
+          );
+        }
       },
       {
         Header: 'Depression',
         accessor: 'DEP',
         Filter: SelectColumnFilter,
         filter: 'includes',
+        Cell: ({ value }) => {
+          const nameArr = ['0'];
+
+          return nameArr.includes(value) ? (
+            <div className='zero' >{value}</div>
+          ) : (
+            value
+          );
+        }
       },
       {
         Header: 'Generalized Anxiety',
         accessor: 'GAD',
         Filter: SelectColumnFilter,
         filter: 'includes',
+        Cell: ({ value }) => {
+          const nameArr = ['0'];
+
+          return nameArr.includes(value) ? (
+            <div className='zero' >{value}</div>
+          ) : (
+            value
+          );
+        }
       },
       {
         Header: 'Suicide Severity Rating',
         accessor: 'SSRS',
         Filter: SelectColumnFilter,
         filter: 'includes',
+        Cell: ({ value }) => {
+          const nameArr = ['0'];
+
+          return nameArr.includes(value) ? (
+            <div className='zero' >{value}</div>
+          ) : (
+            value
+          );
+        }
       },
       {
         Header: 'Overall Rating',
         accessor: 'OR',
         Filter: SelectColumnFilter,
         filter: 'includes',
+        Cell: ({ value }) => {
+          const nameArr = ['0'];
+
+          return nameArr.includes(value) ? (
+            <div className='zero' style={{ background: "green" }} >{value}</div>
+          ) : (
+            value
+          );
+        }
       },
     ],
     []
   )
 
+  
+
   const data = React.useMemo(
     () => [
       {
        CLI: '0001',
-        PIL: '0',
-        ACE: '0',
-        AA: '15',
+        PIL: '30',
+        ACE: '25',
+        AA: '30',
         SSQ: '0',
-        PTS: '0',
-        ISI: '0',
-        DEP: '0',
+        PTS: '30',
+        ISI: '15',
+        DEP: '30',
         GAD: '15',
-        SSRS: '0',
-        OR: '15',
+        SSRS: '25',
+        OR: '30',
       },
-{
+      {
        CLI: '0002',
         PIL: '0',
         ACE: '0',      
@@ -355,16 +448,16 @@ function ReactColor() {
         SSQ: '15',
         PTS: '0',
         ISI: '0',
-        DEP: '25',
-        GAD: '20',
+        DEP: '30',
+        GAD: '25',
         SSRS: '0',
-        OR: '20',
+        OR: '25',
       },
       {
        CLI: '0003',
         PIL: '0',
         ACE: '15',
-        AA: '20',
+        AA: '25',
         SSQ: '0',
         PTS: '0',
         ISI: '0',
@@ -375,35 +468,35 @@ function ReactColor() {
       },
       {
        CLI: '0004',
-        PIL: '25',
+        PIL: '30',
         ACE: '15',
-        AA: '20',
+        AA: '25',
         SSQ: '0',
         PTS: '0',
         ISI: '0',
         DEP: '15',
         GAD: '15',
         SSRS: '0',
-        OR: '25',
+        OR: '30',
       },
       {
        CLI: '0005',
         PIL: '15',
         ACE: '15',
-        AA: '25',
+        AA: '30',
         SSQ: '0',
         PTS: '15',
         ISI: '0',
         DEP: '0',
-        GAD: '20',
-        SSRS: '20',
-        OR: '25',
+        GAD: '25',
+        SSRS: '25',
+        OR: '30',
       },
       {
        CLI: '0006',
         PIL: '0',
         ACE: '15',
-        AA: '25',
+        AA: '30',
         SSQ: '0',
         PTS: '0',
         ISI: '0',
@@ -416,7 +509,7 @@ function ReactColor() {
        CLI: '0007',  
         PIL: '0',
         ACE: '0',
-        AA: '25',
+        AA: '30',
         SSQ: '0',
         PTS: '15',
         ISI: '15',
@@ -427,16 +520,16 @@ function ReactColor() {
       },
       {
        CLI: '0008',
-        PIL: '20',
+        PIL: '25',
         ACE: '15',
         AA: '0',
         SSQ: '0',
-        PTS: '20',
+        PTS: '25',
         ISI: '0',
-        DEP: '25',
+        DEP: '15',
         GAD: '0',
         SSRS: '0',
-        OR: '20',
+        OR: '25',
       },
       {
        CLI: '0009',
@@ -458,7 +551,7 @@ function ReactColor() {
          AA: '15',
          SSQ: '0',
          PTS: '0',
-         ISI: '0',
+         ISI: '30',
          DEP: '0',
          GAD: '15',
          SSRS: '0',
@@ -467,7 +560,7 @@ function ReactColor() {
     ],
     []
   )  
-  // const data = React.useMemo(() => makeData(20), [])
+  // const data = React.useMemo(() => makeData(25), [])
 
   return (
     <Styles>
@@ -479,17 +572,11 @@ function ReactColor() {
           getCellProps={cellInfo => ({
             style: {
               backgroundColor: `hsl(${25 * ((25 - cellInfo.value) / 25) * + 3 +
-                25}, 100%, 55%)`,
+              25}, 90%, 50%)`,
               },
             })}
-            getTrProps={(state, rowInfo, column) => {
-                return {
-                    style: {
-                        background: rowInfo.row.selected ? 'green' : 'red'
-                      }
-                    }
-                  }}
-                  />
+
+        />
       </div>
     </Styles>
   )

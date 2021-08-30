@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
 .App {
   display: grid;
@@ -51,7 +52,9 @@
 .table-outer {
     padding: 1rem;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 .legend-outer {
   display: flex;
@@ -68,28 +71,28 @@
   width: 20px;
   position: relative;
   top: 22px;
-  background-color: #66ff1a;
+  background-color: green;
 }
 .yellow {
   height: 20px;
   width: 20px;
   position: relative;
   top: 22px;
-  background-color: #FFEC1A;
+  background-color: #ffea00;
 }
 .orange {
   height: 20px;
   width: 20px;
   position: relative;
   top: 22px;
-  background-color: #ffb31a;
+  background-color: #ff6a00;
 }
 .red {
   height: 20px;
   width: 20px;
   position: relative;
   top: 22px;
-  background-color: #ff791a;
+  background-color: #ff2b00;
 }
 h3 {
   color: rgb(30, 30, 30)
@@ -102,3 +105,28 @@ td:hover {
 th:hover {
   background-color: azure;
 }
+
+[role=row]:hover {
+  filter: brightness(0.75);
+}
+
+code p {
+  font-family: 'Montserrat', sans-serif;
+}
+/* p {
+  position: relative;
+  right: 650px;
+}
+pre {
+  position: relative;
+  right: 618px;
+} */
+table {
+  width: 75vw;
+}
+
+
+.zero {
+ filter: brightness(0.75);
+}
+
