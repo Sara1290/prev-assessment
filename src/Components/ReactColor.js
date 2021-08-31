@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 
 
+
 const Styles = styled.div`
   padding: 1rem;
 
@@ -21,12 +22,25 @@ const Styles = styled.div`
       }
     }
 
-    th,
     td {
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+      height: 38px;
+      padding: 0;
+   
+
+      :last-child {
+        border-right: 0;
+      }
+    }
+
+    th
+    {
       margin: 0;
       padding: 0.5rem;
       border-bottom: 1px solid black;
       border-right: 1px solid black;
+   
 
       :last-child {
         border-right: 0;
@@ -63,25 +77,20 @@ function Table({
   getCellProps = defaultPropGetter,
   getTrProps = defaultPropGetter,
 }) {
-  const defaultColumn = React.useMemo(
-    () => ({
-      // Let's set up our default Filter UI
-      Filter: DefaultColumnFilter,
-    }),
-    []
-  )
+
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     rows,
     prepareRow,
-    selectedFlatRows,
-    state: { selectedRowIds },
+    // getTdProps,
+    // selectedFlatRows,
+    // state: { selectedRowIds },
   } = useTable({
     columns,
     data,
-    defaultColumn
+
   },
   useColumnOrder,
   useFilters,
@@ -175,6 +184,7 @@ function Table({
                       getColumnProps(cell.column),
                       getCellProps(cell),
                     ])}
+
                   >
                     {cell.render('Cell')}
                   </td>
@@ -190,27 +200,8 @@ function Table({
     
         </>
   )
-  
 }
 
-
-//THIS FUNCTION ADDS A SEARCH INPUT WHEN THE DROP DOWN IS REMOVED FROM THE COLUMN. TO GET RID OF THE INPUT, I NULL OUT THE RETURN.
-function DefaultColumnFilter({
-  column: { filterValue, preFilteredRows, setFilter },
-}) {
-  // const count = preFilteredRows.length
-
-  return (
-    null
-    // <input
-    //   value={filterValue || ''}
-    //   onChange={e => {
-    //     setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
-    //   }}
-    //   placeholder={`Search ${count} records...`}
-    // />
-  )
-}
 
 function SelectColumnFilter({
   column: { filterValue, setFilter, preFilteredRows, id },
@@ -254,33 +245,36 @@ filterGreaterThan.autoRemove = val => typeof val !== 'number'
 
 function ReactColor() {
   
-
-
-
   const columns = React.useMemo(
     () => [
-      {
-        Header: 'Client',
-        accessor: 'CLI', // accessor is the "key" in the data
-        minWidth: 150,
-        Filter: SelectColumnFilter,
-        filter: 'includes',
-      },
+      // {
+      //   Header: 'Client',
+      //   accessor: 'CLI', // accessor is the "key" in the data
+      //   minWidth: 150,
+      //   Filter: SelectColumnFilter,
+      //   filter: 'includes',
+      //   Cell: (column) => {
+      //     return <span data-tip={column.value}>{column.value}</span>;
+      //   }
+      // },
       {
         Header: 'Purpose In Life',
         accessor: 'PIL', // accessor is the "key" in the data
         minWidth: 150,
         Filter: SelectColumnFilter,
         filter: 'includes',
-        Cell: ({ value }) => {
+        Cell: ({ value, column, PIL }) => {
           const nameArr = ['0'];
+    
 
           return nameArr.includes(value) ? (
-            <div className='zero' >{value}</div>
+            <div className='zero' >{value} </div>
+            
           ) : (
             value
           );
-        }
+        },
+        tipText: 'Purpose In Life' 
       },
       {
         Header: "ACE'S",
@@ -396,7 +390,7 @@ function ReactColor() {
         filter: 'includes',
         Cell: ({ value }) => {
           const nameArr = ['0'];
-
+ 
           return nameArr.includes(value) ? (
             <div className='zero' >{value}</div>
           ) : (
@@ -413,18 +407,17 @@ function ReactColor() {
           const nameArr = ['0'];
 
           return nameArr.includes(value) ? (
-            <div className='zero' style={{ background: "green" }} >{value}</div>
+            <div className='zero' >{value}</div>
           ) : (
             value
           );
         }
-      },
+      }
     ],
     []
   )
 
   
-
   const data = React.useMemo(
     () => [
       {
@@ -561,10 +554,11 @@ function ReactColor() {
     []
   )  
   // const data = React.useMemo(() => makeData(25), [])
-
+  
   return (
     <Styles>
       <div className="table-outer">
+
         <Table
           columns={columns}
           data={data}
@@ -572,9 +566,10 @@ function ReactColor() {
           getCellProps={cellInfo => ({
             style: {
               backgroundColor: `hsl(${25 * ((25 - cellInfo.value) / 25) * + 3 +
-              25}, 90%, 50%)`,
+                25}, 100%, 50%)`,
               },
             })}
+            
 
         />
       </div>
