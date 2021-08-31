@@ -21,6 +21,9 @@
   padding-left: 10px;
   padding-right: 10px;
 }
+.header-outer {
+  width: 100%;
+}
 .header {
   display: flex;
   flex-direction: column;
@@ -115,7 +118,7 @@ code p {
 }
 
 table {
-  width: 75vw;
+  width: 65vw;
 }
 
 
@@ -125,4 +128,16 @@ div.zero {
   padding-left: 3px;
 }
 
+@media screen and (max-width: 400px) {
+
+.footer-outer {
+  display: flex; 
+  justify-content: center;
+  padding-top: 55px;
+  padding-bottom: 15px;
+  position: relative;
+  left: 28vw;
+
+}
+}
 

@@ -250,7 +250,7 @@ function ReactColor() {
       // {
       //   Header: 'Client',
       //   accessor: 'CLI', // accessor is the "key" in the data
-      //   minWidth: 150,
+
       //   Filter: SelectColumnFilter,
       //   filter: 'includes',
       //   Cell: (column) => {
@@ -260,7 +260,7 @@ function ReactColor() {
       {
         Header: 'Purpose In Life',
         accessor: 'PIL', // accessor is the "key" in the data
-        minWidth: 150,
+      
         Filter: SelectColumnFilter,
         filter: 'includes',
         Cell: ({ value, column, PIL }) => {
@@ -279,7 +279,7 @@ function ReactColor() {
       {
         Header: "ACE'S",
         accessor: 'ACE',
-        minWidth: 150,
+  
         Filter: SelectColumnFilter,
         filter: 'includes',
         Cell: ({ value }) => {
@@ -295,7 +295,7 @@ function ReactColor() {
       {
         Header: 'Alcohol Abuse',
         accessor: 'AA',
-        minWidth: 150,
+
         Filter: SelectColumnFilter,
         filter: 'includes',
         Cell: ({ value }) => {
