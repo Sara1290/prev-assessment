@@ -241,6 +241,13 @@ function App() {
   const columns = React.useMemo(
     () => [
       {
+        Header: 'Client',
+        accessor: 'CLI', // accessor is the "key" in the data
+        minWidth: 150,
+        Filter: SelectColumnFilter,
+        filter: 'includes',
+      },
+      {
         Header: 'Purpose In Life',
         accessor: 'PIL', // accessor is the "key" in the data
         minWidth: 150,
@@ -310,6 +317,7 @@ function App() {
   const data = React.useMemo(
     () => [
       {
+        CLI: "Mickey Mouse",
         PIL: '0',
         ACE: '0',
         AA: '15',

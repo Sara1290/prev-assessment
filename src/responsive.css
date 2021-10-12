@@ -1,0 +1,29 @@
+/*  MOBILE  */
+@media screen and (max-width: 500px) {
+  .header > h1 {
+    font-size: 30px;
+  }
+  .logo {
+    height: 3rem;
+  }
+}
+
+/*  SMALLER TABLET  */
+@media screen and (max-width: 768px) {
+  .header > h1 {
+    font-size: 40px;
+  }
+}
+/*   LARGER TABLET */
+@media screen and (max-width: 1100px) {
+  .header > h1 {
+    font-size: 60px;
+  }
+}
+/*  LARGE SCREENS  */
+@media screen and (min-width: 1300px) {
+  .header > h1 {
+    font-size: 60px;
+  }
+}
+

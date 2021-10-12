@@ -6,9 +6,9 @@ const Footer = () => {
 
   return (
     <div className="footer-outer">
-      <img alt="previdence logo" src={prev} />
+      <img alt="previdence logo" src={prev} className="logo" />
       <div className="vert-line"></div>
-      <h3>Previdence 2021</h3>
+      <h2>Previdence 2021</h2>
     </div>
   )
 }
