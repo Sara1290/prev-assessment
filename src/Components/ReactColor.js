@@ -421,7 +421,7 @@ function ReactColor() {
   const data = React.useMemo(
     () => [
       {
-       CLI: 'Carlos Stevens',
+       CLI: 'Carlos',
         PIL: '0',
         ACE: '15',
         AA: '30',
@@ -434,7 +434,7 @@ function ReactColor() {
         OR: '30',
       },
       {
-       CLI: 'Joshua Adkins',
+       CLI: 'Joshua',
         PIL: '0',
         ACE: '15',      
         AA: '30',
@@ -447,7 +447,7 @@ function ReactColor() {
         OR: '30',
       },
       {
-       CLI: 'Ashley Smith',
+       CLI: 'Ashley',
         PIL: '0',
         ACE: '0',
         AA: '30',
@@ -460,7 +460,7 @@ function ReactColor() {
         OR: '30',
       },
       {
-        CLI: 'Douglas Gonzalez',
+        CLI: 'Douglas',
         PIL: '25',
         ACE: '15',
         AA: '0',
@@ -473,7 +473,7 @@ function ReactColor() {
         OR: '25',
       },
       {
-        CLI: 'Donna Harris',
+        CLI: 'Donna',
         PIL: '0',
         ACE: '0',
         AA: '0',
@@ -486,7 +486,7 @@ function ReactColor() {
         OR: '25',
       },
       {
-        CLI: 'Jerome Moore',
+        CLI: 'Jerome',
         PIL: '0',
         ACE: '0',
         AA: '30',
@@ -499,7 +499,7 @@ function ReactColor() {
         OR: '25',
       },
         {
-          CLI: 'Kelly Schmidt',
+          CLI: 'Kelly',
           PIL: '0',
           ACE: '0',
           AA: '30',
@@ -512,7 +512,7 @@ function ReactColor() {
           OR: '15',
         },
         {
-          CLI: 'Mary Martinez',
+          CLI: 'Mary',
           PIL: '0',
           ACE: '15',
           AA: '0',
@@ -525,7 +525,7 @@ function ReactColor() {
           OR: '15',
         },
         {
-          CLI: 'Alvin Jimenez',
+          CLI: 'Alvin',
           PIL: '0',
           ACE: '15',
           AA: '30',
@@ -538,7 +538,7 @@ function ReactColor() {
           OR: '15',
         },   
        {
-        CLI: 'Lori Stephens',
+        CLI: 'Lori',
          PIL: '0',
          ACE: '15',
          AA: '0',
@@ -551,7 +551,7 @@ function ReactColor() {
          OR: '0',
        },
        {
-        CLI: 'Patrick Wilson',
+        CLI: 'Patrick',
          PIL: '0',
          ACE: '0',
          AA: '0',
@@ -564,7 +564,7 @@ function ReactColor() {
          OR: '0',
        },
        {
-        CLI: 'Beverly Guerrero',
+        CLI: 'Beverly',
          PIL: '0',
          ACE: '0',
          AA: '0',
@@ -577,7 +577,7 @@ function ReactColor() {
          OR: '0',
        },
        {
-        CLI: 'April Yates',
+        CLI: 'April',
          PIL: '0',
          ACE: '0',
          AA: '25',
